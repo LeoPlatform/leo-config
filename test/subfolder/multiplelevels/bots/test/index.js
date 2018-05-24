@@ -11,5 +11,8 @@ exports.handler = async function(event, context, callback) {
 	let dynamodbsetting = await config.dynamodbSetting;
 	console.log(dynamodbsetting);
 
+	console.log(await config.kmsEncrypted);
+
+
 	callback();
 };
