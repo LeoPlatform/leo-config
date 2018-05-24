@@ -1,0 +1,23 @@
+{
+  "name": "leo-config",
+  "version": "1.0.0",
+  "description": "Node configuration based on NODE_ENV as well as integrations into AWS KMS, Secrets Manager, and DynamoDB for configuration values",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoPlatform/leo-config.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LeoPlatform/leo-config/issues"
+  },
+  "homepage": "https://github.com/LeoPlatform/leo-config#readme",
+  "dependencies": {
+    "leo-aws": "^1.0.0",
+    "lodash.merge": "^4.6.1"
+  }
+}
