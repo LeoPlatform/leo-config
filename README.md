@@ -4,9 +4,7 @@
 Leo Config is designed as a NODE_ENV based system for storing configuration for as many deployment environments as you want
 using a hierarchical approach, and securely accessing stored credentials.
  
-We recommend using AWS Secrets Manager for storing database credentials
-Node configuration based on NODE_ENV as well as integrations into AWS KMS, Secrets Manager, and DynamoDB for configuration
-settings.
+We recommend using AWS Secrets Manager for storing database credentials.
 
 #### Basic usage example
 In your application, require leo-config, then you can use any of the configuration settings outlined in the following steps.
