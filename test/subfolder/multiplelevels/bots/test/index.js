@@ -12,6 +12,8 @@ exports.handler = async function(event, context, callback) {
 	console.log(dynamodbsetting);
 
 	console.log(await config.kmsEncrypted);
+	//This one will be cached, because of how config was defined
+	console.log(await config.kmsEncrypted);
 
 
 	callback();
