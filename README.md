@@ -1,5 +1,5 @@
 # leo-config
-[example config fiile](https://github.com/LeoPlatform/leo-config/blob/master/test/leo_config.js)
+[example config file](https://github.com/LeoPlatform/leo-config/blob/master/test/leo_config.js)
 
 Leo Config is designed as a NODE_ENV based system for storing configuration for as many deployment environments as you want
 using a hierarchical approach, and securely accessing stored credentials.
