@@ -134,7 +134,7 @@ dev: function() {
             database: 'test'
         },
         leoaws: leoaws({
-            profile: 'stage',
+            profile: 'dev',
             region: 'us-west-2'
         })
     }
