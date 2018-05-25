@@ -15,6 +15,8 @@ const config = require('leo-config');
 
 exports.handler = async function(event, context, callback) {
     // your config settings are now in the config object
+    
+    // Example getting the database credentials:
     // use await to make sure your code waits for database credentials before trying to connect to the database
     let dbConfig = await config.database;
     
