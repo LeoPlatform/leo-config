@@ -10,11 +10,20 @@ async function cacheSetting(key, promise, time = null) {
 	return settingCache[key];
 }
 
+let ui = {};
+
 let config = {
 	env: system,
 	bootstrap: function(params) {
 		if (typeof params == "string") {
 			params = require(params);
+		}
+
+		//prebuild the UI stuff
+		for (var key in params) {
+			if (key != '_local' && key != '_global') {
+				ui[key] = merge(params._global.ui, params[key].ui);
+			}
 		}
 		//Lets check if they have a global
 		if ("_global" in params) {
@@ -46,7 +55,9 @@ let config = {
 module.exports = new Proxy(config, {
 	get: function(target, propKey) {
 		const orig = target[propKey];
-		if (propKey == "bootstrap") {
+		if (propKey == "_leo_prebuilt_ui") {
+			return ui;
+		} else if (propKey == "bootstrap") {
 			return orig;
 		} else if (orig && typeof orig == "function") {
 			return orig.call(config, cacheSetting.bind(config, propKey));
