@@ -22,9 +22,10 @@ let config = {
 		//prebuild the UI stuff
 		for (var key in params) {
 			if (key != '_local' && key != '_global') {
-				ui[key] = merge(params._global.ui, params[key].ui);
+				ui[key] = merge(params._global && params._global.ui, params[key].ui);
 			}
 		}
+
 		//Lets check if they have a global
 		if ("_global" in params) {
 			if (typeof params._global == "function") {
@@ -66,3 +67,12 @@ module.exports = new Proxy(config, {
 		}
 	}
 });
+
+// Try and bootstrap
+if (process.env.leo_config_bootstrap_path) {
+	try {
+		module.exports.bootstrap(require(process.env.leo_config_bootstrap_path));
+	} catch (e) {
+		// Not bootstrapped
+	}
+}
