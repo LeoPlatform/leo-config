@@ -11,6 +11,7 @@ let ui = {};
 
 let config = {
 	env: system,
+	leoaws: {},
 	bootstrap: function(params) {
 		if (typeof params == "string") {
 			params = require(params);
@@ -46,6 +47,7 @@ let config = {
 				merge(config, params._local);
 			}
 		}
+
 		global.leosdk = config.leosdk;
 
 		return module.exports;
