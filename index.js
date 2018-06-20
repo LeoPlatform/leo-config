@@ -2,12 +2,9 @@
 const merge = require('lodash.merge');
 let system = process.env.NODE_ENV;
 let isLocal = process.env.LEO_LOCAL || 'false';
+let settingCache = {};
 async function cacheSetting(key, promise, time = null) {
-	if (!(key in settingCache)) {
-		settingCache[key] = await promise;
-	}
-
-	return settingCache[key];
+	return settingCache[key] = await promise;
 }
 
 let ui = {};
@@ -50,6 +47,7 @@ let config = {
 			}
 		}
 		global.leosdk = config.leosdk;
+
 		return module.exports;
 	}
 };
@@ -61,7 +59,10 @@ module.exports = new Proxy(config, {
 		} else if (propKey == "bootstrap") {
 			return orig;
 		} else if (orig && typeof orig == "function") {
-			return orig.call(config, cacheSetting.bind(config, propKey));
+			if (!(propKey in settingCache)) {
+				return orig.call(config, cacheSetting.bind(config, propKey));
+			}
+			return settingCache[propKey];
 		} else {
 			return orig;
 		}
