@@ -48,7 +48,14 @@ let config = {
 			}
 		}
 
-		global.leosdk = config.leosdk;
+		let sdk = config.leosdk || {};
+		global.leosdk = Object.assign({
+			"region": sdk.Region,
+			"resources": sdk,
+			"firehose": sdk.LeoFirehoseStream,
+			"kinesis": sdk.LeoKinesisStream,
+			"s3": sdk.LeoS3
+		}, config.leosdk);
 
 		return module.exports;
 	}
