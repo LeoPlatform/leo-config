@@ -79,64 +79,56 @@ For this example, I will be using a basic `dev`, `stage`, `prod`; but you can us
 in your NODE_ENV.
 ```javascript
 // if NODE_ENV=prod, use settings for the prod environment
-prod: function() {
-    return {
-        leoaws: leoaws({
-            profile: 'prod',
-            region: 'us-west-2'
-        }),
-        // using database as a dynamic function, get the credentials from AWS Secrets Manager
-        database: function() {
-            return this.leoaws.secrets.getSecret('mysql_prod_secret')
+prod: {
+    // using database as a dynamic function, get the credentials from AWS Secrets Manager
+    database: function() {
+        return this.leoaws.secrets.getSecret('mysql_prod_secret')
+    },
+    // setting your AWS configuration
+    "leo-sdk": {
+        "resources": {
+            "Region": "us-west-2",
+            "LeoArchive": "DevBus-LeoArchive-AB01CD23EF45GH67IJ89KL0M",
+            "LeoCron": "DevBus-LeoCron-CD23EF45GH67IJ89KL01MN2O",
+            "LeoEvent": "DevBus-LeoEvent-EF45GH67IJ89KL01MN23OP4Q",
+            "LeoFirehoseStream": "DevBus-LeoFirehoseStream-GH67IJ89KL01MN23OP45QR6S",
+            "LeoKinesisStream": "DevBus-LeoKinesisStream-IJ89KL01MN23OP45QR67ST8U",
+            "LeoS3": "devbus-leos3-KL01MN23OP45QR67ST89UV0W",
+            "LeoSettings": "DevBus-LeoSettings-MN23OP45QR67ST89UV01WX2Y",
+            "LeoStream": "DevBus-LeoStream-OP45QR67ST89UV01WX23YZ4A",
+            "LeoSystem": "DevBus-LeoSystem-QR67ST89UV01WX23YZ45AB6C"
         },
-        // setting your AWS configuration
-        "leo-sdk": {
-            "region": "us-west-2",
-            "resources": {
-                "Region": "us-west-2",
-                "LeoArchive": "DevBus-LeoArchive-AB01CD23EF45GH67IJ89KL0M",
-                "LeoCron": "DevBus-LeoCron-CD23EF45GH67IJ89KL01MN2O",
-                "LeoEvent": "DevBus-LeoEvent-EF45GH67IJ89KL01MN23OP4Q",
-                "LeoFirehoseStream": "DevBus-LeoFirehoseStream-GH67IJ89KL01MN23OP45QR6S",
-                "LeoKinesisStream": "DevBus-LeoKinesisStream-IJ89KL01MN23OP45QR67ST8U",
-                "LeoS3": "devbus-leos3-KL01MN23OP45QR67ST89UV0W",
-                "LeoSettings": "DevBus-LeoSettings-MN23OP45QR67ST89UV01WX2Y",
-                "LeoStream": "DevBus-LeoStream-OP45QR67ST89UV01WX23YZ4A",
-                "LeoSystem": "DevBus-LeoSystem-QR67ST89UV01WX23YZ45AB6C"
-            },
-            "firehose": "DevBus-LeoFirehoseStream-ST89UV01WX23YZ45AB67CD8E",
-            "kinesis": "DevBus-LeoKinesisStream-UV01WX23YZ45AB67CD89EF0G",
-            "s3": "devbus-leos3-WX23YZ45AB67CD89EF01GH2I"
-        },
+        "firehose": "DevBus-LeoFirehoseStream-ST89UV01WX23YZ45AB67CD8E",
+        "kinesis": "DevBus-LeoKinesisStream-UV01WX23YZ45AB67CD89EF0G",
+        "s3": "devbus-leos3-WX23YZ45AB67CD89EF01GH2I"
     }
 },
 // if NODE_ENV=stage, use settings for the stage environment
-stage: function() {
-    return {
-        leoaws: leoaws({
-            profile: 'stage',
-            region: 'us-west-2'
-        }),
-        database: function() {
-            return this.leoaws.secrets.getSecret('mysql_stage_secret')
-        }
+stage: {
+    database: function() {
+        return this.leoaws.secrets.getSecret('mysql_stage_secret')
     }
 },
 // if NODE_ENV=dev, use settings for the dev environment
-dev: function() {
-    return {
-        // using database as a static object
-        database: {
-            username: 'root',
-            password: 'mySuperSecretAndVerySecurePasswordNowStoredInTheCode',
-            host: 'db.mydomain.com',
-            port: '1234',
-            database: 'test'
-        },
-        leoaws: leoaws({
-            profile: 'dev',
-            region: 'us-west-2'
-        })
+dev: {
+    // using database as a static object
+    database: {
+        username: 'root',
+        password: 'mySuperSecretAndVerySecurePasswordNowStoredInTheCode',
+        host: 'db.mydomain.com',
+        port: '1234',
+        database: 'test'
+    }
+}
+```
+### Local testing
+If you have an environment variable `LEO_LOCAL=true`, you can use `_local` and override any settings in _global and env section.
+```javascript
+_local: {
+    // required for local testing with AWS.
+    leoaws: {
+        profile: "default", // set in your ~/.aws/credentials
+        region: "us-west-2"
     }
 }
 ```
@@ -145,10 +137,35 @@ If you use a dynamic function, you can cache the value by first passing in `cach
 your call in the `cache` function.
 ##### Example
 ```javascript
-dev: function() {
+dev: {
     dynamodbSettings: function(cache) {
         return cache(this.leoaws.dynamodb.get("DevBus-LeoSettings-14HODE41JWL2O", "healthSNS_data"));
     }
+}
+```
+
+## leo_cli_config.js
+```javascript
+module.exports = { 
+  linkedStacks: [
+    "LeoBus" // must match the parameter name in deploy
+  ],  
+  publish: [{   
+      leoaws: {
+        profile: "default", // defined in ~/.aws/credentials
+        region: "us-west-2" // supported regions: us-west-2 and us-east-1 
+      },  
+      public: false
+  }],  
+  deploy: {
+    dev: {
+      stack: "QuickStart",
+      parameters: {
+        LeoBus: "DevBus",
+        AlarmEmail: "default@email.com"
+      }   
+    }   
+  }
 }
 ```
 
