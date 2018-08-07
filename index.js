@@ -54,8 +54,7 @@ let config = {
 			"resources": sdk,
 			"firehose": sdk.LeoFirehoseStream,
 			"kinesis": sdk.LeoKinesisStream,
-			"s3": sdk.LeoS3,
-			"profile": sdk.profile || config.leoaws && config.leoaws.profile
+			"s3": sdk.LeoS3
 		};
 
 		return module.exports;
