@@ -1,5 +1,3 @@
-const leoaws = require("leo-aws");
-
 module.exports = {
 	/**Added on every system**/
 	_global: {
@@ -21,14 +19,14 @@ module.exports = {
 	/**------------------------ User defined Systems ----------------------**/
 	prod: {
 		database: function() {
-			return this.leoaws.secrets.getSecret("mysql_test_secret");
+			return require('leo-aws').secrets.getSecret('mysql_test_secret');
 		},
 		dynamodbSetting: function(cache) {
-			return cache(this.leoaws.dynamodb.get("DevBus-LeoSettings-14HODE41JWL2O", "healthSNS_data"));
+			return cache(require('leo-aws').dynamodb.get("DevBus-LeoSettings-14HODE41JWL2O", "healthSNS_data"));
 		},
 		kmsEncrypted: function(cache) {
 			// this.leoaws.kms.encrypt("a5bede8a-4e63-4275-899d-30d97f8baa35", "I encrypted this with KMS");
-			return cache(this.leoaws.kms.decrypt("AQICAHjPqXpvMEzdW6UaJYb0j5mC6Qd3OD81ZyxQBe248hmgAQG+kzHQzVl3R4DfxHymzR32AAAAdzB1BgkqhkiG9w0BBwagaDBmAgEAMGEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMBK771xuMUY4B/KagAgEQgDSVwzTvTtKiFi6ceia27UjXUW8AGgrGTV/LsAK6ZfDt1RkOZO5QimKydV22KXri26FAPmzV"));
+			return cache(require('leo-aws').kms.decrypt("AQICAHjPqXpvMEzdW6UaJYb0j5mC6Qd3OD81ZyxQBe248hmgAQG+kzHQzVl3R4DfxHymzR32AAAAdzB1BgkqhkiG9w0BBwagaDBmAgEAMGEGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMBK771xuMUY4B/KagAgEQgDSVwzTvTtKiFi6ceia27UjXUW8AGgrGTV/LsAK6ZfDt1RkOZO5QimKydV22KXri26FAPmzV"));
 		},
 		"leo-sdk": {
 			"region": "us-west-2",
