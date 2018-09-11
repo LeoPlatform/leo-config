@@ -169,7 +169,57 @@ module.exports = {
 }
 ```
 
-Happy coding!
+## UI Config
+If you have created a [Leo React App](https://github.com/LeoPlatform/cli#create-a-react-application) you can a configuration profile that *may* be passed to the front end
+```
+'use strict';
+module.exports = {
+    _global: {
+        ui: {
+            cognito: {
+                id: "some-cognito-id"
+            },
+            region: "some-aws-region"
+        }
+    }
+}
+```
+Find the LEOCognito object [here](https://github.com/LeoPlatform/bus-ui/tree/master/ui/static/js)
+
+The following shows examples of how to extract some or all of the leo_config via the `leo` server side object 
+```
+<html>
+    <head>
+        <base href="${leo.baseHref}" />
+        <script>
+            // Full UI Config from leo_config.js
+            window.leo = ${leo}; 
+            // Start LEOCognito 
+            LEOCognito.start(leo.cognito.id, false, {region:leo.region, cognito_region: leo.cognito_region || leo.region});
+
+
+
+            // Just parts of the UI Config
+            window.leo = {
+                cognitoId: "${leo.cognito.id}", 
+                region: "${leo.region}",
+                cognito_region: "${leo.region}"
+            };            
+            // Start LEOCognito 
+            LEOCognito.start(leo.cognitoId, false, {region:leo.region, cognito_region: leo.cognito_region || leo.region});
+
+
+            // Start LEOCognito using replacements
+            LEOCognito.start("${leo.cognito.id}", false, {region:"${leo.region}", cognito_region: "${leo.region}"});
+
+        </script>
+    </head>
+    <body>
+        <p>Hello World</p>
+    </body>
+</html>
+```
+
 
 ## Support
 Want to hire an expert, or need technical support? Reach out to the Leo team: https://leoinsights.com/contact
