@@ -201,7 +201,7 @@ The following shows examples of how to extract some or all of the leo_config via
     </body>
 </html>
 ```
-
+Also, note the `basehref` coming from `leo`. That is intended to be the HTML <base> so your urls are relative to the deployment
 
 ## leo_cli_config.js
 ```javascript
