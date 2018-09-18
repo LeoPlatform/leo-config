@@ -227,7 +227,14 @@ module.exports = {
   }
 }
 ```
-
+You may add a `test` section to configure an application port
+```
+module.exports = {
+    test: {
+        port: 8080
+    }
+}
+```
 
 ## Support
 Want to hire an expert, or need technical support? Reach out to the Leo team: https://leoinsights.com/contact
