@@ -151,31 +151,6 @@ dev: {
 }
 ```
 
-## leo_cli_config.js
-```javascript
-module.exports = { 
-  linkedStacks: [
-    "LeoBus" // must match the parameter name in deploy
-  ],  
-  publish: [{   
-      leoaws: {
-        profile: "default", // defined in ~/.aws/credentials
-        region: "us-west-2" // supported regions: us-west-2 and us-east-1 
-      },  
-      public: false
-  }],  
-  deploy: {
-    dev: {
-      stack: "QuickStart",
-      parameters: {
-        LeoBus: "DevBus",
-        AlarmEmail: "default@email.com"
-      }   
-    }   
-  }
-}
-```
-
 ## UI Config
 If you have created a [Leo React App](https://github.com/LeoPlatform/cli#create-a-react-application) you can a configuration profile that *may* be passed to the front end
 ```
@@ -225,6 +200,32 @@ The following shows examples of how to extract some or all of the leo_config via
         <p>Hello World</p>
     </body>
 </html>
+```
+
+
+## leo_cli_config.js
+```javascript
+module.exports = { 
+  linkedStacks: [
+    "LeoBus" // must match the parameter name in deploy
+  ],  
+  publish: [{   
+      leoaws: {
+        profile: "default", // defined in ~/.aws/credentials
+        region: "us-west-2" // supported regions: us-west-2 and us-east-1 
+      },  
+      public: false
+  }],  
+  deploy: {
+    dev: {
+      stack: "QuickStart",
+      parameters: {
+        LeoBus: "DevBus",
+        AlarmEmail: "default@email.com"
+      }   
+    }   
+  }
+}
 ```
 
 
