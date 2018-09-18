@@ -227,7 +227,7 @@ module.exports = {
   }
 }
 ```
-You may add a `test` section to configure an application port
+You may add a `test` section to configure an [application](https://github.com/LeoPlatform/cli#create-a-react-application) port
 ```
 module.exports = {
     test: {
