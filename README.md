@@ -2,6 +2,7 @@
 Leo configuration consists of two files. leo_config.js and leo_cli_config.js. As their names suggest, they configure two different aspects of a Leo Microservice
 
 [leo_config.js](#leo-config) - Deals with the runtime configuration of a Microservices
+
 [leo_cli_config.js](#leo_cli_configjs) - Deals with the [leo-cli](https://github.com/LeoPlatform/cli) configuration to use to start/run the microservice
 
 # leo-config
