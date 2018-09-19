@@ -5,7 +5,7 @@ Leo configuration consists of two files. leo_config.js and leo_cli_config.js. As
 
 [leo_cli_config.js](#leo_cli_configjs) - Configures the [leo-cli](https://github.com/LeoPlatform/cli) to execute/publish/deploy a Microservice
 
-# leo-config
+## leo-config
 [example config file](https://github.com/LeoPlatform/leo-config/blob/master/test/leo_config.js)
 
 Leo Config is designed as a NODE_ENV based system for storing configuration for as many deployment environments as you want
@@ -151,7 +151,7 @@ dev: {
 }
 ```
 
-## UI Config
+### UI Config
 If you have created a [Leo React App](https://github.com/LeoPlatform/cli#create-a-react-application) you can a configuration profile that *may* be passed to the front end
 ```
 'use strict';
