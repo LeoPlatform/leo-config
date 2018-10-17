@@ -20,7 +20,7 @@ let config = {
 		//prebuild the UI stuff
 		for (var key in params) {
 			if (key != '_local' && key != '_global') {
-				ui[key] = merge(params._global && params._global.ui, params[key].ui);
+				ui[key] = merge({}, params._global && params._global.ui, params[key].ui);
 			}
 		}
 
