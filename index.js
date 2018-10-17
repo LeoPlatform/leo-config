@@ -48,14 +48,16 @@ let config = {
 			}
 		}
 
-		let sdk = config.leosdk || config["leo-sdk"] || {};
-		global.leosdk = {
-			"region": sdk.Region,
-			"resources": sdk,
-			"firehose": sdk.LeoFirehoseStream,
-			"kinesis": sdk.LeoKinesisStream,
-			"s3": sdk.LeoS3
-		};
+		let sdk = config.leosdk || config["leo-sdk"];
+		if (sdk) {
+      global.leosdk = {
+        "region": sdk.Region,
+        "resources": sdk,
+        "firehose": sdk.LeoFirehoseStream,
+        "kinesis": sdk.LeoKinesisStream,
+        "s3": sdk.LeoS3
+      };
+    }
 
 		return module.exports;
 	}
