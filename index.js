@@ -1,6 +1,6 @@
 "use strict";
 const merge = require('lodash.merge');
-let system = process.env.LEO_ENV || process.env.NODE_ENV;
+let system = process.env.LEO_ENVIRONMENT || process.env.NODE_ENV;
 let isLocal = process.env.LEO_LOCAL || 'false';
 let settingCache = {};
 async function cacheSetting(key, promise, time = null) {
