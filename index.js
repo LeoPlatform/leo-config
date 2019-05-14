@@ -20,7 +20,7 @@ let config = {
 		//prebuild the UI stuff
 		for (var key in params) {
 			if (key != '_local' && key != '_global') {
-				ui[key] = merge(params._global && params._global.ui, params[key].ui);
+				ui[key] = merge({}, params._global && params._global.ui, params[key].ui);
 			}
 		}
 
@@ -48,14 +48,16 @@ let config = {
 			}
 		}
 
-		let sdk = config.leosdk || config["leo-sdk"] || {};
-		global.leosdk = {
-			"region": sdk.Region,
-			"resources": sdk,
-			"firehose": sdk.LeoFirehoseStream,
-			"kinesis": sdk.LeoKinesisStream,
-			"s3": sdk.LeoS3
-		};
+		let sdk = config.leosdk || config["leo-sdk"];
+		if (sdk) {
+      global.leosdk = {
+        "region": sdk.Region,
+        "resources": sdk,
+        "firehose": sdk.LeoFirehoseStream,
+        "kinesis": sdk.LeoKinesisStream,
+        "s3": sdk.LeoS3
+      };
+    }
 
 		return module.exports;
 	}
