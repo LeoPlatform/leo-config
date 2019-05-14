@@ -1,6 +1,6 @@
 {
   "name": "leo-config",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Node configuration based on NODE_ENV as well as integrations into AWS KMS, Secrets Manager, and DynamoDB for configuration values",
   "main": "index.js",
   "scripts": {
