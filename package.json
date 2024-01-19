@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/LeoPlatform/leo-config#readme",
   "dependencies": {
-    "lodash.merge": "^4.6.1"
+    "lodash.merge": "^4.6.2"
   }
 }
